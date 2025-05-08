@@ -2,28 +2,34 @@
 #include <iostream>
 #include <cstring>
 
-Client::Client() : Human() {
+Client::Client() : Human()
+{
+    products = nullptr;
     strcpy_s(company, "Unknown");
     strcpy_s(address, "Unknown");
     productCount = 0;
     totalToPay = 0.0f;
 }
 
-Client::Client(char* FName, char* LName, char* PhoneNumber, char* Email, char* Company, char* Address)
-    : Human(FName, LName, PhoneNumber, Email) {
+Client::Client(char *FName, char *LName, char *PhoneNumber, char *Email, char *Company, char *Address)
+    : Human(FName, LName, PhoneNumber, Email)
+{
     strcpy_s(company, Company);
     strcpy_s(address, Address);
     productCount = 0;
     totalToPay = 0.0f;
 }
 
-Client::~Client() {
-   delete[] products;
+Client::~Client()
+{
+    delete[] products;
 }
 
-void Client::AddProduct(Stock product) {
-    Stock* newProducts = new Stock[productCount + 1];
-    for (int i = 0; i < productCount; i++) {
+void Client::AddProduct(Stock product)
+{
+    Stock *newProducts = new Stock[productCount + 1];
+    for (int i = 0; i < productCount; i++)
+    {
         newProducts[i] = products[i];
     }
 
@@ -34,14 +40,17 @@ void Client::AddProduct(Stock product) {
     productCount++;
 }
 
-void Client::CalculateTotal() {
+void Client::CalculateTotal()
+{
     totalToPay = 0.0;
-    for (int i = 0; i < productCount; i++) {
+    for (int i = 0; i < productCount; i++)
+    {
         totalToPay += products[i].CalculateTotal();
     }
 }
 
-void Client::PrintClient() {
+void Client::PrintClient()
+{
     printf("Client Name: %s %s\n", fname, lname);
     printf("Phone Number: %s\n", phonenumber);
     printf("Email: %s\n", email);
@@ -49,7 +58,8 @@ void Client::PrintClient() {
     printf("Address: %s\n", address);
     printf("Products Ordered:\n");
 
-    for (int i = 0; i < productCount; ++i) {
+    for (int i = 0; i < productCount; ++i)
+    {
         products[i].PrintStock();
     }
 
